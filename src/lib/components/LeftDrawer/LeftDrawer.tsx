@@ -37,7 +37,6 @@ export const LeftDrawer = () => {
         onClick={onOpen}
         variant="ghost"
         aria-label="Open drawer"
-        display={{ base: 'flex', lg: 'none' }}
         icon={<HamburgerIcon w="5" h="5" />}
       />
       <Drawer
@@ -69,7 +68,7 @@ export const LeftDrawer = () => {
 
           <DrawerBody>
             <Stack direction="column" spacing="2" w="100%">
-              <Text px="4" color="fg.muted">
+              <Text px="4" color="fg.subtle">
                 connect
               </Text>
               <Stack direction="column" spacing="1" w="100%">
@@ -89,7 +88,7 @@ export const LeftDrawer = () => {
 
               <Divider my="1" />
 
-              <Text px="4" color="fg.muted">
+              <Text px="4" color="fg.subtle">
                 info
               </Text>
               <Stack direction="column" spacing="1" w="100%">
