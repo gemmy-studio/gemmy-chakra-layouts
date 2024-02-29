@@ -11,7 +11,6 @@ import {
   ButtonGroup,
   Button,
   Link,
-  useBreakpointValue,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
@@ -20,8 +19,6 @@ import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { LeftDrawer } from '../LeftDrawer';
 import { Logo } from '../Logo';
 export const Navbar = () => {
-  const viewBox = useBreakpointValue({ base: '0 0 88 88', md: '0 0 525 88' });
-
   return (
     <>
       <Box
@@ -36,11 +33,11 @@ export const Navbar = () => {
         boxShadow="sm"
       >
         <Container maxW="container.xl" py="4" px={{ base: '4', md: '8' }}>
-          <Stack direction={['row']} spacing="12">
+          <Stack direction={['row']} spacing={{ base: '0', md: '12' }}>
             <Center>
               <LeftDrawer />
-              <Link as={NextLink} href="/">
-                <Logo color="accent.primary" viewBox={viewBox} />
+              <Link as={NextLink} href="/" w="168px">
+                <Logo color="accent.primary" />
               </Link>
             </Center>
 
@@ -71,11 +68,16 @@ export const Navbar = () => {
                   aria-label="Search database"
                   icon={<SearchIcon w="5" h="5" />}
                 />
-                <Box display={{ base: 'none', lg: 'flex' }}>
+                <Box display={{ base: 'none', md: 'flex' }}>
                   <ColorModeSwitcher />
                 </Box>
               </ButtonGroup>
-              <Button as={NextLink} href="/login" variant="outline">
+              <Button
+                as={NextLink}
+                href="/login"
+                variant="outline"
+                px={{ base: '2', sm: '4' }}
+              >
                 Sign in
               </Button>
             </Stack>
