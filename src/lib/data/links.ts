@@ -1,7 +1,6 @@
 export const connectLinks = [
   { href: '/blog', label: '블로그' },
   { href: '/community', label: '커뮤니티' },
-  { href: '/inquiry', label: '문의하기' },
   { href: '/notice', label: '공지사항' },
 ];
 

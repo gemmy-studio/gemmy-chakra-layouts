@@ -11,6 +11,8 @@ import {
   ButtonGroup,
   Button,
   Link,
+  useColorModeValue,
+  Avatar,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
@@ -18,13 +20,26 @@ import { connectLinks } from '../../data/links';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { LeftDrawer } from '../LeftDrawer';
 import { Logo } from '../Logo';
+import { Cookies } from 'react-cookie';
+import { useEffect, useState } from 'react';
+
 export const Navbar = () => {
+  const cookies = new Cookies();
+  const allCookies = cookies.getAll();
+  const [authStatus, setAuthStatus] = useState(false);
+
+  useEffect(() => {
+    setAuthStatus(allCookies.userId);
+  }, [allCookies]);
+
   return (
     <>
       <Box
         as="nav"
         role="navigation"
-        bg="bg.primary"
+        bg={useColorModeValue('whiteAlpha.500', 'blackAlpha.500')}
+        backdropFilter="auto"
+        backdropBlur="2px"
         pos="fixed"
         top="0"
         left="0"
@@ -33,7 +48,7 @@ export const Navbar = () => {
         boxShadow="sm"
       >
         <Container maxW="container.xl" py="4" px={{ base: '4', md: '8' }}>
-          <Stack direction={['row']} spacing={{ base: '0', md: '12' }}>
+          <Stack direction={['row']} spacing={{ base: '0', md: '10' }}>
             <Center>
               <LeftDrawer />
               <Link as={NextLink} href="/" w="168px">
@@ -72,14 +87,24 @@ export const Navbar = () => {
                   <ColorModeSwitcher />
                 </Box>
               </ButtonGroup>
-              <Button
-                as={NextLink}
-                href="/login"
-                variant="outline"
-                px={{ base: '2', sm: '4' }}
-              >
-                Sign in
-              </Button>
+              {authStatus ? (
+                <Center>
+                  <Avatar
+                    size="sm"
+                    name={allCookies.userNickname}
+                    src={allCookies.userImage}
+                  />
+                </Center>
+              ) : (
+                <Button
+                  as={NextLink}
+                  href="/login"
+                  variant="outline"
+                  px={{ base: '2', sm: '4' }}
+                >
+                  Sign in
+                </Button>
+              )}
             </Stack>
           </Stack>
         </Container>
