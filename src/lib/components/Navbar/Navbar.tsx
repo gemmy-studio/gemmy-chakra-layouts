@@ -20,16 +20,30 @@ import { connectLinks } from '../../data/links';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { LeftDrawer } from '../LeftDrawer';
 import { Logo } from '../Logo';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import { Cookies } from 'react-cookie';
-import { useEffect, useState } from 'react';
 
 export const Navbar = () => {
   const cookies = new Cookies();
   const allCookies = cookies.getAll();
   const [authStatus, setAuthStatus] = useState(false);
+  const { user, setUser } = useContext(UserContext);
+  const userId = user.id;
 
   useEffect(() => {
-    setAuthStatus(allCookies.userId);
+    setAuthStatus(Boolean(userId));
+  }, [userId]);
+
+  useEffect(() => {
+    if (allCookies.userId !== userId) {
+      setUser({
+        id: allCookies.userId,
+        image: allCookies.userImage,
+        nickname: allCookies.userNickname,
+        email: allCookies.userEmail,
+      });
+    }
   }, [allCookies]);
 
   return (
@@ -50,7 +64,7 @@ export const Navbar = () => {
         <Container maxW="container.xl" py="4" px={{ base: '4', md: '8' }}>
           <Stack direction={['row']} spacing={{ base: '0', md: '10' }}>
             <Center>
-              <LeftDrawer />
+              <LeftDrawer authStatus={authStatus} user={user} />
               <Link as={NextLink} href="/" w="168px">
                 <Logo color="accent.primary" />
               </Link>
@@ -91,8 +105,8 @@ export const Navbar = () => {
                 <Center>
                   <Avatar
                     size="sm"
-                    name={allCookies.userNickname}
-                    src={allCookies.userImage}
+                    name={user.nickname as string}
+                    src={user.image as string}
                   />
                 </Center>
               ) : (
