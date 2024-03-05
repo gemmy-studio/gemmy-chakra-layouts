@@ -39,13 +39,7 @@ const socialLinks = [
 export const Footer = (props: BoxProps) => {
   return (
     <Box as="footer" role="contentinfo" bg="bg.primary" {...props}>
-      <Container
-        as="footer"
-        role="contentinfo"
-        maxW="container.xl"
-        py="8"
-        px={{ base: '4', md: '8' }}
-      >
+      <Container as="footer" role="contentinfo" maxW="none" py="8" px="26px">
         <Stack spacing="4">
           <Stack
             justify="space-between"

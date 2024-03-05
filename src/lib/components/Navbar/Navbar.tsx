@@ -61,14 +61,16 @@ export const Navbar = () => {
         zIndex="sticky"
         boxShadow="sm"
       >
-        <Container maxW="container.xl" py="4" px={{ base: '4', md: '8' }}>
+        <Container maxW="none" py="3" px="4">
           <Stack direction={['row']} spacing={{ base: '0', md: '10' }}>
-            <Center>
+            <Stack direction={['row']} spacing="1">
               <LeftDrawer authStatus={authStatus} user={user} />
-              <Link as={NextLink} href="/" w="168px">
-                <Logo color="accent.primary" />
-              </Link>
-            </Center>
+              <Center>
+                <Link as={NextLink} href="/" w="168px">
+                  <Logo color="accent.primary" />
+                </Link>
+              </Center>
+            </Stack>
 
             <Stack
               direction="row"
@@ -107,6 +109,7 @@ export const Navbar = () => {
                     size="sm"
                     name={user.nickname as string}
                     src={user.image as string}
+                    mr="10px"
                   />
                 </Center>
               ) : (
@@ -115,6 +118,7 @@ export const Navbar = () => {
                   href="/login"
                   variant="outline"
                   px={{ base: '2', sm: '4' }}
+                  mr="10px"
                 >
                   Sign in
                 </Button>
@@ -123,7 +127,7 @@ export const Navbar = () => {
           </Stack>
         </Container>
       </Box>
-      <Box pt="72px" />
+      <Box pt="64px" />
     </>
   );
 };
