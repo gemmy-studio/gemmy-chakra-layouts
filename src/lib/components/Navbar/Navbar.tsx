@@ -58,10 +58,10 @@ export const Navbar = () => {
         top="0"
         left="0"
         width="100%"
-        zIndex="sticky"
+        zIndex="docked"
         boxShadow="sm"
       >
-        <Container maxW="none" py="3" px="4">
+        <Container maxW="none" py="3" px="3">
           <Stack direction={['row']} spacing={{ base: '0', md: '10' }}>
             <Stack direction={['row']} spacing="1">
               <LeftDrawer authStatus={authStatus} user={user} />
