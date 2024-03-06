@@ -10,9 +10,9 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { Footer } from '../Footer';
+import { SingleLayout } from '../SingleLayout';
 
-interface ThreePartLayoutProps {
+interface TripleLayoutProps {
   left?: ReactNode;
   main: ReactNode;
   right?: ReactNode;
@@ -22,11 +22,7 @@ const SIDE_PANEL_WIDTH = '240px';
 const SIDE_PANEL_TRANSITION = 'left 0.5s';
 const MAIN_PANEL_WIDTH = 'calc(50vw - 384px)';
 
-export const ThreePartLayout = ({
-  left,
-  main,
-  right,
-}: ThreePartLayoutProps) => {
+export const TripleLayout = ({ left, main, right }: TripleLayoutProps) => {
   const { isOpen, onToggle } = useDisclosure();
   const color = useColorModeValue('blackAlpha.500', 'whiteAlpha.500');
 
@@ -69,17 +65,18 @@ export const ThreePartLayout = ({
       <Spacer />
 
       <Box w={{ base: '100%', md: '768px' }}>
-        <Center>
-          <Box
-            w={{ base: '100%', md: '708px' }}
-            pt={{ base: '0', md: '6' }}
-            pb="8"
-          >
-            {main}
-          </Box>
-        </Center>
-        <Divider />
-        <Footer />
+        <SingleLayout>
+          <Center>
+            <Box
+              w={{ base: '100%', md: '708px' }}
+              pt={{ base: '0', md: '6' }}
+              pb="8"
+            >
+              {main}
+            </Box>
+          </Center>
+          <Divider />
+        </SingleLayout>
       </Box>
 
       <Spacer />
@@ -102,4 +99,4 @@ export const ThreePartLayout = ({
   );
 };
 
-export default ThreePartLayout;
+export default TripleLayout;
